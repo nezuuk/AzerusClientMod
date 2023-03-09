@@ -1,0 +1,16 @@
+[
+{
+  "modid": "azerusclientmod",
+  "name": "AzerusClientMod",
+  "description": "AzerusClientMod",
+  "version": "${version}",
+  "mcversion": "1.12.2",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["emrass"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

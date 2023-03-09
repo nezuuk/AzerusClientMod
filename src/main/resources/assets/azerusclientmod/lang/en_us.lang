@@ -1,0 +1,9 @@
+key.tbscclick.toggleright=Auto-Click Right Mouse Button
+key.tbscclick.toggleleft=Auto-Click Left Mouse Button
+key.tbscclick.togglesmartattack=Toggle Smart Attack
+key.tbscclick.toggleholdleft=Hold Left Mouse Button
+key.tbscclick.toggleholdright=Hold Right Mouse Button
+key.tbscclick.speed=Change Auto Clicking Speed
+key.tbscclick.openC=Open Menu
+
+key.categories.tbscclick=TbscClick
