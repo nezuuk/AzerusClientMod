@@ -2,6 +2,7 @@ package ru.emrass.azerusclientmod;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
@@ -13,13 +14,14 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import org.lwjgl.opengl.GL11;
 import ru.emrass.azerusclientmod.DropMobs.DropDisplay;
 import ru.emrass.azerusclientmod.DropMobs.MobTimer;
-import ru.emrass.azerusclientmod.ServerInfo.RenderInfo;
 import ru.emrass.azerusclientmod.config.ModConfig;
 
 import javax.xml.crypto.Data;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Mod(modid = AzerusClientMod.MODID, clientSideOnly = true, useMetadata = true)
 
@@ -60,32 +62,49 @@ public class AzerusClientMod {
         }
     }
 
-    @SubscribeEvent
-    public void onRenderGameOverlay(RenderGameOverlayEvent event) {
-        if (event.getType() == RenderGameOverlayEvent.ElementType.TEXT) {
-            MobTimer.onRenderGameOverlay();
-            if(mc.player != null) {
-                GL11.glPushMatrix();
-                GL11.glScalef(ModConfig.MOBS_COOLDOWN.counterSize, ModConfig.MOBS_COOLDOWN.counterSize, ModConfig.MOBS_COOLDOWN.counterSize);
-                mc.fontRenderer.drawStringWithShadow("Сервер: " + AzerusClientMod.currentServerName, event.getResolution().getScaledWidth() - 210, event.getResolution().getScaledHeight() - 30, 0xFFFFFF);
-                mc.fontRenderer.drawStringWithShadow("Время работы: " + AzerusClientMod.serverTime, event.getResolution().getScaledWidth() - 210, event.getResolution().getScaledHeight() - 20, 0xFFFFFF);
-                GL11.glPopMatrix();
-            }
-        }
-    }
+//    @SubscribeEvent
+//    public void onRenderGameOverlay(RenderGameOverlayEvent event) {
+//        if (event.getType() == RenderGameOverlayEvent.ElementType.TEXT) {
+//            MobTimer.onRenderGameOverlay();
+//            if(mc.player != null) {
+//                GL11.glPushMatrix();
+//                GL11.glScalef(ModConfig.MOBS_COOLDOWN.counterSize, ModConfig.MOBS_COOLDOWN.counterSize, ModConfig.MOBS_COOLDOWN.counterSize);
+//                mc.fontRenderer.drawStringWithShadow("§" + ModConfig.customize.TextServerColor + "Сервер: " + AzerusClientMod.currentServerName, event.getResolution().getScaledWidth() - 210, event.getResolution().getScaledHeight() - 30, 0xFF55FF);
+//                mc.fontRenderer.drawStringWithShadow("§" + ModConfig.customize.TextOnlineServerColor + "Время работы: " + AzerusClientMod.serverTime, event.getResolution().getScaledWidth() - 210, event.getResolution().getScaledHeight() - 20, 0xFF55FF);
+//                GL11.glPopMatrix();
+//            }
+//        }
+//    }
 
 
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event){ ModConfig.updateMobsRespawningTime();}
 
-    @SubscribeEvent
-    public void onTick(TickEvent.ClientTickEvent event) {
-        tick++;
-        if (tick % 200 == 0){
-            if(Minecraft.getMinecraft().player != null)
-                Minecraft.getMinecraft().player.sendChatMessage("/lag");
-
+//    @SubscribeEvent
+//    public void onTick(TickEvent.ClientTickEvent event) {
+//        tick++;
+//        if (tick % 200 == 0){
+//            if(Minecraft.getMinecraft().player != null)
+//                Minecraft.getMinecraft().player.sendChatMessage("/lag");
+//
+//        }
+//    }
+    public static TextFormatting getMobColor(String name) {
+        Pattern pattern = Pattern.compile(".*\\[.*\\] (.*) §c\\[.*\\].*");
+        Matcher matcher = pattern.matcher(name);
+        TextFormatting nameColor = TextFormatting.WHITE;
+        if (matcher.find()) {
+            String normalMobName = matcher.group(1);
+            if (!normalMobName.matches(".*X\\d.*")) {
+                if (normalMobName.matches(".*§c.*")) nameColor = TextFormatting.RED;
+                else if (normalMobName.matches(".*§4.*")) nameColor = TextFormatting.DARK_RED;
+                else if (normalMobName.matches(".*§6.*")) nameColor = TextFormatting.GOLD;
+            }
         }
+
+
+//        AzerusHelper.logger.info(nameColor);
+        return nameColor;
     }
 }

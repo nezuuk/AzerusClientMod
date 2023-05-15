@@ -26,21 +26,39 @@ public class ModConfig
         @Config.Name("Размер счётчика")
         @Config.Comment("Задаёт размер счётчика\nРекомендуемое значение - 1.0")
         public float counterSize = 1.0F;
-
+        @Config.Name("Общий счётчик на гильдию(отправка)")
+        public boolean guildCooldownSyncSend = false;
         @Config.Name("Список мобов")
         @Config.Comment("Список имен мобов и время их возрождения в минутах.")
         public String[] mobsRespawningTime = {
                 "Восставший маг:3",
-                "Восставший волшебник:3"
+                "Восставший волшебник:90"
         };
 
-        @Config.Name("Групирование одинаковых мобов")
-        @Config.Comment("Будут ли одинаковые мобы группироваться в одну строчку в счётчике.")
-        public boolean mobStacking = true;
     }
 
+    @Config.Comment("Категория конфигов счётчика возрождения мобов")
+    public static final Customize customize = new Customize();
 
+    public static class Customize {
+        @Config.Name("Цветовой код надписи: сервер. Цветовой код майнка. ток цифра")
+        public String TextServerColor = "f";
+        @Config.Name("Цветовой код значения поля сервер.Цветовой код майнка.ток цифра ")
+        public String ServerColor = "e";
 
+        @Config.Name("Цветовой код надписи: Время работы.Цветовой код майнка.ток цифра ")
+        public String TextOnlineServerColor = "f";
+
+        @Config.Name("Цветовой код значения поля время работы. Цветовой код майнка.ток цифра ")
+        public String OnlineServerColor = "e";
+
+        @Config.Name("Цветовой код значения таймера. HEX!!!!! (пример: 0xFFFF)")
+        public int TimerColor = 0xFFFF;
+
+        @Config.Name("Цветовой код имени мобов.Цветовой код майнка.Цветовой код майнка. ток цифра")
+        public String NameMobs = "f";
+
+    }
     @SubscribeEvent
     public static void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event)
     {

@@ -1,6 +1,8 @@
 package ru.emrass.azerusclientmod.DropMobs;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.util.text.TextFormatting;
+import ru.emrass.azerusclientmod.config.ModConfig;
 
 import java.util.*;
 
@@ -10,9 +12,12 @@ public class MobDeaths {
     public void add(String name, TextFormatting nameColor, Date deathAt, Date respawningTime, String uuid, String server) {
         if (!findByUUID(uuid)) {
             mobs.add(new MobDeath(name, nameColor, deathAt, respawningTime, uuid, server));
+            if(ModConfig.MOBS_COOLDOWN.guildCooldownSyncSend) {
+                Minecraft.getMinecraft().player.sendChatMessage("/gc [VX] SRV(" + getStringWithoutColors(server) + ") NAME(" + name + ") ID(" + uuid + ") COL(" + DropDisplay.colorToString(nameColor) + ") CD(" + respawningTime.getTime() + ")");
+            }
         }
     }
-
+    public static String getStringWithoutColors(String styledString) { return styledString.replaceAll("�.", ""); }
     public HashMap<String, HashMap<String, List<MobDeath>>> getGroups() {
         HashMap<String, List<MobDeath>> serverGroups = groupByServer();
         HashMap<String, HashMap<String, List<MobDeath>>> groups = new HashMap<String, HashMap<String, List<MobDeath>>>();

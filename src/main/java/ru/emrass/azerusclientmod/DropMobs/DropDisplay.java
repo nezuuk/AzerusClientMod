@@ -1,9 +1,11 @@
 package ru.emrass.azerusclientmod.DropMobs;
 
+import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.Style;
@@ -13,6 +15,7 @@ import net.minecraft.util.text.event.HoverEvent;
 import net.minecraftforge.client.event.ClientChatReceivedEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import org.lwjgl.opengl.GL11;
 import ru.emrass.azerusclientmod.AzerusClientMod;
@@ -151,23 +154,7 @@ public class DropDisplay {
             }
         }
     }
-    public static TextFormatting getMobColor(String name) {
-        Pattern pattern = Pattern.compile(".*\\[.*\\] (.*) §c\\[.*\\].*");
-        Matcher matcher = pattern.matcher(name);
-        TextFormatting nameColor = TextFormatting.WHITE;
-        if (matcher.find()) {
-            String normalMobName = matcher.group(1);
-            if (!normalMobName.matches(".*X\\d.*")) {
-                if (normalMobName.matches(".*§c.*")) nameColor = TextFormatting.RED;
-                else if (normalMobName.matches(".*§4.*")) nameColor = TextFormatting.DARK_RED;
-                else if (normalMobName.matches(".*§6.*")) nameColor = TextFormatting.GOLD;
-            }
-        }
-
-
-//        AzerusHelper.logger.info(nameColor);
-        return nameColor;
-    }
+//
 
     public static TextFormatting stringToColor(String string) {
         switch (string) {
