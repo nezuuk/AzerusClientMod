@@ -62,19 +62,19 @@ public class AzerusClientMod {
         }
     }
 
-//    @SubscribeEvent
-//    public void onRenderGameOverlay(RenderGameOverlayEvent event) {
-//        if (event.getType() == RenderGameOverlayEvent.ElementType.TEXT) {
-//            MobTimer.onRenderGameOverlay();
-//            if(mc.player != null) {
-//                GL11.glPushMatrix();
-//                GL11.glScalef(ModConfig.MOBS_COOLDOWN.counterSize, ModConfig.MOBS_COOLDOWN.counterSize, ModConfig.MOBS_COOLDOWN.counterSize);
-//                mc.fontRenderer.drawStringWithShadow("§" + ModConfig.customize.TextServerColor + "Сервер: " + AzerusClientMod.currentServerName, event.getResolution().getScaledWidth() - 210, event.getResolution().getScaledHeight() - 30, 0xFF55FF);
-//                mc.fontRenderer.drawStringWithShadow("§" + ModConfig.customize.TextOnlineServerColor + "Время работы: " + AzerusClientMod.serverTime, event.getResolution().getScaledWidth() - 210, event.getResolution().getScaledHeight() - 20, 0xFF55FF);
-//                GL11.glPopMatrix();
-//            }
-//        }
-//    }
+    @SubscribeEvent
+    public void onRenderGameOverlay(RenderGameOverlayEvent event) {
+        if (event.getType() == RenderGameOverlayEvent.ElementType.TEXT) {
+            MobTimer.onRenderGameOverlay();
+            if(mc.player != null) {
+                GL11.glPushMatrix();
+                GL11.glScalef(ModConfig.MOBS_COOLDOWN.counterSize, ModConfig.MOBS_COOLDOWN.counterSize, ModConfig.MOBS_COOLDOWN.counterSize);
+                mc.fontRenderer.drawStringWithShadow("§" + ModConfig.customize.TextServerColor + "Сервер: " + AzerusClientMod.currentServerName, event.getResolution().getScaledWidth() - 210, event.getResolution().getScaledHeight() - 30, 0xFF55FF);
+                mc.fontRenderer.drawStringWithShadow("§" + ModConfig.customize.TextOnlineServerColor + "Время работы: " + AzerusClientMod.serverTime, event.getResolution().getScaledWidth() - 210, event.getResolution().getScaledHeight() - 20, 0xFF55FF);
+                GL11.glPopMatrix();
+            }
+        }
+    }
 
 
 
