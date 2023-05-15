@@ -27,7 +27,7 @@ public class ModConfig
         @Config.Comment("Задаёт размер счётчика\nРекомендуемое значение - 1.0")
         public float counterSize = 1.0F;
         @Config.Name("Общий счётчик на гильдию(отправка)")
-        public boolean guildCooldownSyncSend = false;
+        public boolean guildCooldownSyncSend = true;
         @Config.Name("Список мобов")
         @Config.Comment("Список имен мобов и время их возрождения в минутах.")
         public String[] mobsRespawningTime = {

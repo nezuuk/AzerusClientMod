@@ -12,9 +12,8 @@ public class MobDeaths {
     public void add(String name, TextFormatting nameColor, Date deathAt, Date respawningTime, String uuid, String server) {
         if (!findByUUID(uuid)) {
             mobs.add(new MobDeath(name, nameColor, deathAt, respawningTime, uuid, server));
-            if(ModConfig.MOBS_COOLDOWN.guildCooldownSyncSend) {
-                Minecraft.getMinecraft().player.sendChatMessage("/gc [VX] SRV(" + getStringWithoutColors(server) + ") NAME(" + name + ") ID(" + uuid + ") COL(" + DropDisplay.colorToString(nameColor) + ") CD(" + respawningTime.getTime() + ")");
-            }
+            Minecraft.getMinecraft().player.sendChatMessage("/gc [VX] SRV(" + getStringWithoutColors(server) + ") NAME(" + name + ") ID(" + uuid + ") COL(" + DropDisplay.colorToString(nameColor) + ") CD(" + respawningTime.getTime() + ")");
+
         }
     }
     public static String getStringWithoutColors(String styledString) { return styledString.replaceAll("�.", ""); }

@@ -81,15 +81,15 @@ public class AzerusClientMod {
     @Mod.EventHandler
     public void init(FMLInitializationEvent event){ ModConfig.updateMobsRespawningTime();}
 
-//    @SubscribeEvent
-//    public void onTick(TickEvent.ClientTickEvent event) {
-//        tick++;
-//        if (tick % 200 == 0){
-//            if(Minecraft.getMinecraft().player != null)
-//                Minecraft.getMinecraft().player.sendChatMessage("/lag");
-//
-//        }
-//    }
+    @SubscribeEvent
+    public void onTick(TickEvent.ClientTickEvent event) {
+        tick++;
+        if (tick % 200 == 0){
+            if(Minecraft.getMinecraft().player != null)
+                Minecraft.getMinecraft().player.sendChatMessage("/lag");
+
+        }
+    }
     public static TextFormatting getMobColor(String name) {
         Pattern pattern = Pattern.compile(".*\\[.*\\] (.*) §c\\[.*\\].*");
         Matcher matcher = pattern.matcher(name);
@@ -103,8 +103,6 @@ public class AzerusClientMod {
             }
         }
 
-
-//        AzerusHelper.logger.info(nameColor);
         return nameColor;
     }
 }
